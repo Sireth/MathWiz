@@ -59,6 +59,8 @@ blank [ \t\r]
 "<="       return yy::parser::make_LE_EQ    (loc);
 "!="       return yy::parser::make_N_EQ     (loc);
 "!"        return yy::parser::make_NOT      (loc);
+"&&"       return yy::parser::make_AND      (loc);
+"||"       return yy::parser::make_OR       (loc);
 "in"       return yy::parser::make_IN       (loc);
 
 
