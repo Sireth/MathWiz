@@ -10,8 +10,8 @@ MathWiz - это библиотека для вычисления математ
 git clone git@github.com:Sireth/MathWiz.git
 cd MathWiz
 mkdir build && cd build
-cmake -GNinja ..
-ninja
+cmake ..
+cmake --build
 ```
 
 Это сконфигурирует проект с помощью CMake и выполнит сборку библиотеки. После успешной сборки вы можете использовать библиотеку в своем проекте.
@@ -21,15 +21,19 @@ ninja
 Для использования MathWiz в вашем проекте, вам нужно будет подключить готовый бинарный файл или добавить MathWiz в ваш проект как зависимость и использовать его API для вычисления математических выражений.
 
 ```cpp
-#include <iostream>
-#include "mathwiz.h"
+#include "ast.h"
+#include "Driver.h"
 
-int main() {
-    MathWiz mathWiz;
-    double result = mathWiz.evaluateExpression("2 + 2 * (3 - 1)");
-    std::cout << "Result: " << result << std::endl;
+int main(){
+    Driver driver;
+    const auto ast = driver.Parse("(5+6-9) < 10");
+    EvalVisitor visitor;
+
+    visitor.visit(ast);
+    auto result = visitor.result;
     return 0;
 }
+
 ```
 
 ## Docker
