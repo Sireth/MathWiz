@@ -28,9 +28,12 @@ int main(){
     mw::Driver driver;
     auto &var_table = driver.variableTable();
     int bar = 12345;
+
     var_table.setVariable("foo", 1234);
     var_table.setVariable("bar", &bar);
-    const auto ast = driver.Parse(R"((foo < bar) || "Helly" <= "Hello world")");
+    var_table.setVariable("help", false);
+
+    const auto ast = driver.Parse(R"(((foo < bar) || "Helly" <= "Hello world") && help != true)");
     mw::EvalVisitor visitor;
 
     visitor.visit(ast);

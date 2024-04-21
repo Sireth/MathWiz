@@ -65,6 +65,7 @@
 ;
 
 %token <int> NUM "number"
+%token <bool> BOOL "boolean"
 %token <std::string> STR "string"
 %token <std::shared_ptr<mw::Ast>> ID "var"
 
@@ -134,6 +135,7 @@ mul_expr:
 
 factor:
     NUM { $$ = mw::new_number($1); }
+    | BOOL { $$ = mw::new_boolean($1); }
     | ID { $$ = $1; }
     | STR { $$ = mw::new_string($1); }
     | "(" expr ")" { $$ = $2; }

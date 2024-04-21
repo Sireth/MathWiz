@@ -22,6 +22,9 @@ namespace mw {
     std::shared_ptr<Ast> new_number(int value);
     std::shared_ptr<Ast> new_number(const int *value);
 
+    std::shared_ptr<Ast> new_boolean(bool value);
+    std::shared_ptr<Ast> new_boolean(const bool *value);
+
     std::shared_ptr<Ast> new_binary_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right,
                                              BinaryOperator::Type type);
 

@@ -32,10 +32,16 @@
       const yy::parser::location_type& loc
   );
 
+  yy::parser::symbol_type make_BOOL(
+      const std::string &s,
+      const yy::parser::location_type& loc
+  );
+
 %}
 
 
 int             [0-9]+
+boolean         true|false
 blank           [ \t\r]
 id              [A-Za-z_][A-Za-z0-9_]*
 quoted_string   \"[^\"]*\"
@@ -76,7 +82,9 @@ quoted_string   \"[^\"]*\"
 "||"            return yy::parser::make_OR       (loc);
 "in"            return yy::parser::make_IN       (loc);
 
-{id}            return make_ID           (yytext, driver(), loc);
+{boolean}       return make_BOOL         (yytext, loc);
+
+{id}            return make_ID (yytext, driver(), loc);
 
 
 {int}           return make_NUM          (yytext, loc);
@@ -97,6 +105,13 @@ yy::parser::symbol_type make_NUM(const std::string &s, const yy::parser::locatio
 
 yy::parser::symbol_type make_QUOTED(const std::string &s, const yy::parser::location_type& loc) {
     return yy::parser::make_STR(s.substr(1, s.length() - 2).c_str(), loc);
+};
+
+yy::parser::symbol_type make_BOOL(const std::string &s, const yy::parser::location_type& loc) {
+    if(s=="true"){
+        return yy::parser::make_BOOL(true, loc);
+    }
+    return yy::parser::make_BOOL(false, loc);
 };
 
 yy::parser::symbol_type make_ID(const std::string &s, const mw::Driver& driver, const yy::parser::location_type& loc) {

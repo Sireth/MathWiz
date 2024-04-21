@@ -7,15 +7,21 @@
  * (c) 2024, SWD Embedded Systems Limited, http://www.kpda.ru
  */
 
-#include "../../include/ast/Boolean.h"
+#include "Boolean.h"
 
 namespace mw {
     Boolean::Boolean(const bool value) :
-        Ast(Type::boolean) {
-        m_value = value;
+        Ast(Type::boolean), m_isPointer(false), m_value(value) {
+    }
+
+    Boolean::Boolean(const bool *value) :
+        Ast(Type::boolean), m_isPointer(true), m_pValue(value) {
     }
 
     bool Boolean::value() const {
-        return m_value;
+        if (!m_isPointer) {
+            return m_value;
+        }
+        return *m_pValue;
     }
 } // mw

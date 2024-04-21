@@ -7,7 +7,7 @@
  * (c) 2024, SWD Embedded Systems Limited, http://www.kpda.ru
  */
 
-#include "../../include/ast/Number.h"
+#include "Number.h"
 
 namespace mw {
     Number::Number(const int value) :
@@ -19,7 +19,7 @@ namespace mw {
     }
 
     int Number::value() const {
-        if(!m_isPointer) {
+        if (!m_isPointer) {
             return m_value;
         }
         return *m_pValue;

@@ -16,11 +16,16 @@ namespace mw {
     class Boolean final : public Ast {
     public:
         explicit Boolean(bool value);
+        explicit Boolean(const bool *value);
 
         bool value() const;
 
     protected:
-        bool m_value;
+        bool m_isPointer;
+        union {
+            bool m_value;
+            const bool *m_pValue;
+        };
     };
 } // mw
 

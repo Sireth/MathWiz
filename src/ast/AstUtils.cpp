@@ -11,6 +11,7 @@
 
 #include "AddOperator.h"
 #include "AndOperator.h"
+#include "Boolean.h"
 #include "DivideOperator.h"
 #include "EqualOperator.h"
 #include "GreaterEqualOperator.h"
@@ -38,6 +39,14 @@ namespace mw {
 
     std::shared_ptr<Ast> new_number(const int *value) {
         return std::make_shared<Number>(value);
+    }
+
+    std::shared_ptr<Ast> new_boolean(bool value) {
+        return std::make_shared<Boolean>(value);
+    }
+
+    std::shared_ptr<Ast> new_boolean(const bool *value) {
+        return std::make_shared<Boolean>(value);
     }
 
     std::shared_ptr<Ast> new_add_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right) {
