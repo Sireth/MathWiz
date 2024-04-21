@@ -21,16 +21,16 @@ cmake --build
 Для использования MathWiz в вашем проекте, вам нужно будет подключить готовый бинарный файл или добавить MathWiz в ваш проект как зависимость и использовать его API для вычисления математических выражений.
 
 ```cpp
-#include "ast.h"
 #include "Driver.h"
+#include "EvalVisitor.h"
 
 int main(){
-    Driver driver;
-    const auto ast = driver.Parse("(5+6-9) < 10");
-    EvalVisitor visitor;
+    mw::Driver driver;
+    const auto ast = driver.Parse("1376*2-537 > 500 && 2 + 3 == 5");
+    mw::EvalVisitor visitor;
 
     visitor.visit(ast);
-    auto result = visitor.result;
+    auto result = visitor.result();
     return 0;
 }
 
