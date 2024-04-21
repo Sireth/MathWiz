@@ -15,11 +15,16 @@ namespace mw {
     class Number : public Ast {
     public:
         explicit Number(int value);
+        explicit Number(const int *value);
 
         int value() const;
 
     protected:
-        int m_value;
+        bool m_isPointer;
+        union {
+            int m_value;
+            const int *m_pValue;
+        };
     };
 } // namespace mw
 

@@ -20,6 +20,7 @@ namespace mw {
     std::shared_ptr<Ast> new_string(const std::string &value);
 
     std::shared_ptr<Ast> new_number(int value);
+    std::shared_ptr<Ast> new_number(const int *value);
 
     std::shared_ptr<Ast> new_binary_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right,
                                              BinaryOperator::Type type);
@@ -49,6 +50,8 @@ namespace mw {
     std::shared_ptr<Ast> new_and_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right);
 
     std::shared_ptr<Ast> new_or_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right);
+
+    std::shared_ptr<Ast> new_variable(const std::string &name, std::shared_ptr<Ast> value);
 
     template<class AstClass>
     std::shared_ptr<AstClass> As(const std::shared_ptr<Ast> ast) {

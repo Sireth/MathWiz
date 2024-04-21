@@ -26,14 +26,17 @@ cmake --build .
 
 int main(){
     mw::Driver driver;
-    const auto ast = driver.Parse("1376*2-537 > 500 && 2 + 3 == 5");
+    auto &var_table = driver.variableTable();
+    int bar = 12345;
+    var_table.setVariable("foo", 1234);
+    var_table.setVariable("bar", &bar);
+    const auto ast = driver.Parse(R"((foo < bar) || "Helly" <= "Hello world")");
     mw::EvalVisitor visitor;
 
     visitor.visit(ast);
-    auto result = visitor.result();
+    auto result = visitor.result(); // should be true
     return 0;
 }
-
 ```
 
 ## Docker

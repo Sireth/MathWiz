@@ -19,6 +19,7 @@ namespace mw {
             string,
             number,
             boolean,
+            variable,
             binary_operator,
         };
 

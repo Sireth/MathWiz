@@ -66,6 +66,7 @@
 
 %token <int> NUM "number"
 %token <std::string> STR "string"
+%token <std::shared_ptr<mw::Ast>> ID "var"
 
 // Uncomment this after complete
 
@@ -133,6 +134,7 @@ mul_expr:
 
 factor:
     NUM { $$ = mw::new_number($1); }
+    | ID { $$ = $1; }
     | STR { $$ = mw::new_string($1); }
     | "(" expr ")" { $$ = $2; }
     ;

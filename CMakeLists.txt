@@ -71,6 +71,10 @@ set(MATH_WIZ_HEADERS
 
         include/visitor/AstVisitor.h
         include/visitor/EvalVisitor.h
+        src/VariableTable.cpp
+        include/VariableTable.h
+        src/ast/Variable.cpp
+        include/ast/Variable.h
 )
 
 set(MATH_WIZ_SOURCES
@@ -102,6 +106,10 @@ set(MATH_WIZ_SOURCES
 
         src/visitor/AstVisitor.cpp
         src/visitor/EvalVisitor.cpp
+        src/VariableTable.cpp
+        include/VariableTable.h
+        src/ast/Variable.cpp
+        include/ast/Variable.h
 )
 
 set(PROJECT_SOURCES

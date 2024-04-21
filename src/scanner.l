@@ -28,6 +28,7 @@
 
   yy::parser::symbol_type make_ID(
       const std::string &s,
+      const mw::Driver& driver,
       const yy::parser::location_type& loc
   );
 
@@ -75,7 +76,7 @@ quoted_string   \"[^\"]*\"
 "||"            return yy::parser::make_OR       (loc);
 "in"            return yy::parser::make_IN       (loc);
 
-{id}            return make_ID           (yytext, loc);
+{id}            return make_ID           (yytext, driver(), loc);
 
 
 {int}           return make_NUM          (yytext, loc);
@@ -98,7 +99,11 @@ yy::parser::symbol_type make_QUOTED(const std::string &s, const yy::parser::loca
     return yy::parser::make_STR(s.substr(1, s.length() - 2).c_str(), loc);
 };
 
-yy::parser::symbol_type make_ID(const std::string &s, const yy::parser::location_type& loc) {
-    //return
+yy::parser::symbol_type make_ID(const std::string &s, const mw::Driver& driver, const yy::parser::location_type& loc) {
+    auto variable = driver.variableTable().getVariable(s);
+    if(variable){
+        return yy::parser::make_ID(variable, loc);
+    }
+    throw yy::parser::syntax_error(loc, "undefined variable: " + s);
 };
 

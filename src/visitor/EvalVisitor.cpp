@@ -23,6 +23,7 @@
 #include "SubtractOperator.h"
 #include "AddOperator.h"
 #include "AstUtils.h"
+#include "Variable.h"
 
 namespace mw {
 
@@ -34,6 +35,14 @@ namespace mw {
             }
             case Ast::Type::string: {
                 visit(As<String>(ast));
+                break;
+            }
+            case Ast::Type::boolean: {
+                visit(As<Boolean>(ast));
+                break;
+            }
+            case Ast::Type::variable: {
+                visit(As<Variable>(ast));
                 break;
             }
             case Ast::Type::binary_operator: {
@@ -112,7 +121,11 @@ namespace mw {
         m_result = As<Ast>(ast);
     }
 
-    void EvalVisitor::visit(std::shared_ptr<AddOperator> ast) {
+    void EvalVisitor::visit(const std::shared_ptr<Variable> ast) {
+        m_result = ast->value();
+    }
+
+    void EvalVisitor::visit(const std::shared_ptr<AddOperator> ast) {
         auto nums = getValues<int>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Number>(nums.value().first + nums.value().second);

@@ -11,10 +11,17 @@
 
 namespace mw {
     Number::Number(const int value) :
-        Ast(Type::number), m_value(value) {
+        Ast(Type::number), m_isPointer(false), m_value(value) {
+    }
+
+    Number::Number(const int *value) :
+        Ast(Type::number), m_isPointer(true), m_pValue(value) {
     }
 
     int Number::value() const {
-        return m_value;
+        if(!m_isPointer) {
+            return m_value;
+        }
+        return *m_pValue;
     }
 } // namespace mw

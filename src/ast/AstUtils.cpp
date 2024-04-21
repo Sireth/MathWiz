@@ -24,6 +24,7 @@
 #include "OrOperator.h"
 #include "String.h"
 #include "SubtractOperator.h"
+#include "Variable.h"
 
 namespace mw {
 
@@ -32,6 +33,10 @@ namespace mw {
     }
 
     std::shared_ptr<Ast> new_number(int value) {
+        return std::make_shared<Number>(value);
+    }
+
+    std::shared_ptr<Ast> new_number(const int *value) {
         return std::make_shared<Number>(value);
     }
 
@@ -85,5 +90,9 @@ namespace mw {
 
     std::shared_ptr<Ast> new_or_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right) {
         return std::make_shared<OrOperator>(std::move(left), std::move(right));
+    }
+
+    std::shared_ptr<Ast> new_variable(const std::string &name, std::shared_ptr<Ast> value) {
+        return std::make_shared<Variable>(name, std::move(value));
     }
 } // mw

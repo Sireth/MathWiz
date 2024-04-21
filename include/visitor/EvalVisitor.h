@@ -35,6 +35,8 @@ public:
 
     void visit(std::shared_ptr<String> ast) override;
 
+    void visit(std::shared_ptr<Variable> ast) override;
+
     void visit(std::shared_ptr<AddOperator> ast) override;
 
     void visit(std::shared_ptr<SubtractOperator> ast) override;

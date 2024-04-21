@@ -13,6 +13,7 @@
 #include <memory>
 
 namespace mw {
+    class Variable;
     class OrOperator;
     class AndOperator;
     class InOperator;
@@ -45,6 +46,8 @@ namespace mw {
         virtual void visit(std::shared_ptr<Boolean> ast) = 0;
 
         virtual void visit(std::shared_ptr<String> ast) = 0;
+
+        virtual void visit(std::shared_ptr<Variable> ast) = 0;
 
         virtual void visit(std::shared_ptr<AddOperator> ast) = 0;
 

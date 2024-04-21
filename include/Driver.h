@@ -4,6 +4,7 @@
 
 #include "parser.hpp"
 #include "Scanner.h"
+#include "VariableTable.h"
 
 namespace mw {
     class Driver {
@@ -16,14 +17,19 @@ namespace mw {
 
         void ScanEnd();
 
-        const std::shared_ptr<Ast> & result() const;
+        std::shared_ptr<Ast> result();
 
         void setResult(std::shared_ptr<Ast> result);
 
-        yy::location & location();
+        yy::location &location();
 
         void setLocation(yy::location location);
 
+        VariableTable &variableTable();
+
+        const VariableTable &variableTable() const;
+
+        void setVariableTable(VariableTable variables);
 
         friend class Scanner;
 
@@ -39,5 +45,7 @@ namespace mw {
 
         std::shared_ptr<Ast> m_result;
         yy::location m_location;
+
+        VariableTable m_variableTable{};
     };
 }
