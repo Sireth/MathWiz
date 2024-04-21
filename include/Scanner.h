@@ -5,7 +5,7 @@
 #endif
 
 #undef YY_DECL
-#define YY_DECL yy::parser::symbol_type mw::Scanner::ScanToken()
+#define YY_DECL yy::parser::symbol_type mw::Scanner::ScanToken() /*mw::Scanner::ScanToken() definition*/
 
 #include "parser.hpp"
 

@@ -21,11 +21,23 @@
     const yy::parser::location_type& loc
   );
 
+  yy::parser::symbol_type make_QUOTED(
+      const std::string &s,
+      const yy::parser::location_type& loc
+  );
+
+  yy::parser::symbol_type make_ID(
+      const std::string &s,
+      const yy::parser::location_type& loc
+  );
+
 %}
 
 
-int   [0-9]+
-blank [ \t\r]
+int             [0-9]+
+blank           [ \t\r]
+id              [A-Za-z_][A-Za-z0-9_]*
+quoted_string   \"[^\"]*\"
 
 
 %{
@@ -43,28 +55,31 @@ blank [ \t\r]
 %}
 
 
-{blank}+   loc.step ();
-\n+        loc.lines (yyleng); loc.step ();
+{blank}+        loc.step ();
+\n+             loc.lines (yyleng); loc.step ();
 
-"("        return yy::parser::make_LPAREN   (loc);
-")"        return yy::parser::make_RPAREN   (loc);
-"*"        return yy::parser::make_MULT     (loc);
-"/"        return yy::parser::make_DIV      (loc);
-"+"        return yy::parser::make_PLUS     (loc);
-"-"        return yy::parser::make_MINUS    (loc);
-">"        return yy::parser::make_GR       (loc);
-"<"        return yy::parser::make_LE       (loc);
-"=="       return yy::parser::make_EQ       (loc);
-">="       return yy::parser::make_GR_EQ    (loc);
-"<="       return yy::parser::make_LE_EQ    (loc);
-"!="       return yy::parser::make_N_EQ     (loc);
-"!"        return yy::parser::make_NOT      (loc);
-"&&"       return yy::parser::make_AND      (loc);
-"||"       return yy::parser::make_OR       (loc);
-"in"       return yy::parser::make_IN       (loc);
+"("             return yy::parser::make_LPAREN   (loc);
+")"             return yy::parser::make_RPAREN   (loc);
+"*"             return yy::parser::make_MULT     (loc);
+"/"             return yy::parser::make_DIV      (loc);
+"+"             return yy::parser::make_PLUS     (loc);
+"-"             return yy::parser::make_MINUS    (loc);
+">"             return yy::parser::make_GR       (loc);
+"<"             return yy::parser::make_LE       (loc);
+"=="            return yy::parser::make_EQ       (loc);
+">="            return yy::parser::make_GR_EQ    (loc);
+"<="            return yy::parser::make_LE_EQ    (loc);
+"!="            return yy::parser::make_N_EQ     (loc);
+"!"             return yy::parser::make_NOT      (loc);
+"&&"            return yy::parser::make_AND      (loc);
+"||"            return yy::parser::make_OR       (loc);
+"in"            return yy::parser::make_IN       (loc);
+
+{id}            return make_ID           (yytext, loc);
 
 
-{int}      return make_NUM (yytext, loc);
+{int}           return make_NUM          (yytext, loc);
+{quoted_string} return make_QUOTED       (yytext, loc);
 
 
 .          {
@@ -75,9 +90,15 @@ blank [ \t\r]
 
 %%
 
-yy::parser::symbol_type make_NUM(
-  const std::string &s,
-  const yy::parser::location_type& loc
-) {
-  return yy::parser::make_NUM(std::stoll(s), loc);
-}
+yy::parser::symbol_type make_NUM(const std::string &s, const yy::parser::location_type& loc) {
+    return yy::parser::make_NUM(std::stoll(s), loc);
+};
+
+yy::parser::symbol_type make_QUOTED(const std::string &s, const yy::parser::location_type& loc) {
+    return yy::parser::make_STR(s.substr(1, s.length() - 2).c_str(), loc);
+};
+
+yy::parser::symbol_type make_ID(const std::string &s, const yy::parser::location_type& loc) {
+    //return
+};
+

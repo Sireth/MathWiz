@@ -65,7 +65,7 @@
 ;
 
 %token <int> NUM "number"
-// %token <std::string> STR "string"
+%token <std::string> STR "string"
 
 // Uncomment this after complete
 
@@ -116,6 +116,7 @@ comp_expr:
     | comp_expr ">=" add_expr { $$ = mw::new_greater_equal_operator($1, $3); }
     | comp_expr "==" add_expr { $$ = mw::new_equal_operator($1, $3); }
     | comp_expr "!=" add_expr { $$ = mw::new_not_equal_operator($1, $3); }
+    | comp_expr "in" add_expr { $$ = mw::new_in_operator($1, $3); }
     ;
 
 add_expr:
@@ -132,6 +133,7 @@ mul_expr:
 
 factor:
     NUM { $$ = mw::new_number($1); }
+    | STR { $$ = mw::new_string($1); }
     | "(" expr ")" { $$ = $2; }
     ;
 
