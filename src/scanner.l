@@ -12,7 +12,7 @@
 %option noyywrap nounput noinput batch debug
 
 %option c++
-%option yyclass="Scanner"
+%option yyclass="mw::Scanner"
 
 %{
 
@@ -36,7 +36,7 @@ blank [ \t\r]
 
 %{
 
-  yy::location& loc = driver.location;
+  yy::location& loc = driver().location();
   // Code run each time yylex is called.
   loc.step();
 

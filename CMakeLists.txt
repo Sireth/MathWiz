@@ -36,19 +36,72 @@ ADD_FLEX_BISON_DEPENDENCY(LEXER PARSER)
 set(MATH_WIZ_INCLUDE_DIRS
         ${CMAKE_CURRENT_BINARY_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ast
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ast/operators
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ast/operators/binary
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/visitor
 )
 
 set(MATH_WIZ_HEADERS
-        include/ast.h
-        include/eval.h
         include/Driver.h
         include/Scanner.h
+
+        include/ast/Ast.h
+        include/ast/AstUtils.h
+        include/ast/String.h
+        include/ast/Number.h
+        include/ast/Boolean.h
+
+        include/ast/operators/binary/BinaryOperator.h
+        include/ast/operators/binary/AddOperator.h
+        include/ast/operators/binary/SubtractOperator.h
+        include/ast/operators/binary/MultiplyOperator.h
+        include/ast/operators/binary/DivideOperator.h
+        include/ast/operators/binary/GreaterOperator.h
+        include/ast/operators/binary/LessOperator.h
+        include/ast/operators/binary/EqualOperator.h
+        include/ast/operators/binary/NotEqualOperator.h
+        include/ast/operators/binary/GreaterEqualOperator.h
+        include/ast/operators/binary/LessEqualOperator.h
+
+        include/ast/operators/binary/InOperator.h
+
+        include/ast/operators/binary/AndOperator.h
+        include/ast/operators/binary/OrOperator.h
+
+        include/visitor/AstVisitor.h
+        include/visitor/EvalVisitor.h
 )
 
 set(MATH_WIZ_SOURCES
         src/Driver.cpp
-        src/eval.cpp
-        src/ast.cpp
+        src/Scanner.cpp
+
+        src/ast/Ast.cpp
+        src/ast/AstUtils.cpp
+        src/ast/String.cpp
+        src/ast/Number.cpp
+        src/ast/Boolean.cpp
+
+        src/ast/operators/binary/BinaryOperator.cpp
+        src/ast/operators/binary/AddOperator.cpp
+        src/ast/operators/binary/SubtractOperator.cpp
+        src/ast/operators/binary/MultiplyOperator.cpp
+        src/ast/operators/binary/DivideOperator.cpp
+        src/ast/operators/binary/GreaterOperator.cpp
+        src/ast/operators/binary/LessOperator.cpp
+        src/ast/operators/binary/EqualOperator.cpp
+        src/ast/operators/binary/NotEqualOperator.cpp
+        src/ast/operators/binary/GreaterEqualOperator.cpp
+        src/ast/operators/binary/LessEqualOperator.cpp
+
+        src/ast/operators/binary/InOperator.cpp
+
+        src/ast/operators/binary/AndOperator.cpp
+        src/ast/operators/binary/OrOperator.cpp
+
+        src/visitor/AstVisitor.cpp
+        src/visitor/EvalVisitor.cpp
 )
 
 set(PROJECT_SOURCES

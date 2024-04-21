@@ -5,22 +5,24 @@
 #endif
 
 #undef YY_DECL
-#define YY_DECL yy::parser::symbol_type Scanner::ScanToken()
+#define YY_DECL yy::parser::symbol_type mw::Scanner::ScanToken()
 
 #include "parser.hpp"
 
-class Driver;
+namespace mw {
+    class Driver;
 
-class Scanner : public yyFlexLexer
-{
-public:
-	explicit Scanner(Driver & driver)
-		: driver(driver)
-	{}
+    class Scanner : public yyFlexLexer {
+    public:
+        explicit Scanner(Driver &driver);
 
-	virtual yy::parser::symbol_type ScanToken();
+        virtual yy::parser::symbol_type ScanToken();
 
-	virtual ~Scanner() = default;
+        ~Scanner() override;
 
-	Driver & driver;
-};
+        Driver &driver() const;
+
+    protected:
+        Driver &m_driver;
+    };
+}
