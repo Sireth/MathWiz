@@ -84,6 +84,29 @@ namespace mw {
             throw std::runtime_error("Variable '" + name + "' already exists");
         }
     }
+    template<>
+    inline void VariableTable::setVariable(const std::string &name, const std::string *value) {
+        const auto it = m_variables.insert({name, std::make_shared<Variable>(name, new_string(value))});
+        if (!it.second) {
+            throw std::runtime_error("Variable '" + name + "' already exists");
+        }
+    }
+
+    template<>
+    inline void VariableTable::setVariable(const std::string &name, std::string *value) {
+        const auto it = m_variables.insert({name, std::make_shared<Variable>(name, new_string(value))});
+        if (!it.second) {
+            throw std::runtime_error("Variable '" + name + "' already exists");
+        }
+    }
+
+    template<>
+    inline void VariableTable::setVariable(const std::string &name, const std::string &value) {
+        const auto it = m_variables.insert({name, std::make_shared<Variable>(name, new_string(value))});
+        if (!it.second) {
+            throw std::runtime_error("Variable '" + name + "' already exists");
+        }
+    }
 } // mw
 
 #endif //VARIABLETABLE_H

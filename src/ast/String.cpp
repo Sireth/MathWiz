@@ -11,8 +11,19 @@
 
 namespace mw {
     String::String(const std::string &value) :
-        Ast(Type::string) {
+        Ast(Type::string), m_isPointer(false) {
         m_value = value;
+    }
+
+    String::String(const std::string *value) :
+        Ast(Type::string), m_isPointer(true) {
+        m_pValue = value;
+    }
+
+    String::~String() {
+        if (!m_isPointer) {
+            m_value.~basic_string();
+        }
     }
 
     const std::string &String::value() const {

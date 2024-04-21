@@ -18,6 +18,7 @@ namespace mw {
     std::shared_ptr<Ast> new_name(std::string value);
 
     std::shared_ptr<Ast> new_string(const std::string &value);
+    std::shared_ptr<Ast> new_string(const std::string *value);
 
     std::shared_ptr<Ast> new_number(int value);
     std::shared_ptr<Ast> new_number(const int *value);

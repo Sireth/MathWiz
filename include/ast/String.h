@@ -19,10 +19,19 @@ namespace mw {
     public:
         explicit String(const std::string &value);
 
+        explicit String(const std::string *value);
+
+        ~String() override;
+
         const std::string &value() const;
 
     protected:
-        std::string m_value;
+        bool m_isPointer;
+
+        union {
+            std::string m_value;
+            const std::string *m_pValue{};
+        };
     };
 } // mw
 

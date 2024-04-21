@@ -33,6 +33,10 @@ namespace mw {
         return std::make_shared<String>(value);
     }
 
+    std::shared_ptr<Ast> new_string(const std::string *value) {
+        return std::make_shared<String>(value);
+    }
+
     std::shared_ptr<Ast> new_number(int value) {
         return std::make_shared<Number>(value);
     }
