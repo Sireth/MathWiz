@@ -11,7 +11,7 @@ git clone git@github.com:Sireth/MathWiz.git
 cd MathWiz
 mkdir build && cd build
 cmake ..
-cmake --build
+cmake --build .
 ```
 
 Это сконфигурирует проект с помощью CMake и выполнит сборку библиотеки. После успешной сборки вы можете использовать библиотеку в своем проекте.
