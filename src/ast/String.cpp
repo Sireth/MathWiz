@@ -27,6 +27,9 @@ namespace mw {
     }
 
     const std::string &String::value() const {
+        if(m_isPointer) {
+            return *m_pValue;
+        }
         return m_value;
     }
 } // mw
