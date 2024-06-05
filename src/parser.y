@@ -7,6 +7,7 @@
 %define parse.assert
 
 %code requires {
+    #include <sstream>
     #include <string>
     #include "Ast.h"
     #include "AstUtils.h"
@@ -147,5 +148,7 @@ factor:
 void
 yy::parser::error(const location_type& l, const std::string& m)
 {
-  std::cerr << l << ": " << m << '\n';
+  std::stringstream ss;
+  ss << l << ": " << m << '\n';
+  throw std::runtime_error(ss.str());
 }
