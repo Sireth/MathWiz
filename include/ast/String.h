@@ -17,7 +17,7 @@
 namespace mw {
     class String final : public Ast {
     public:
-        explicit String(const std::string &value);
+        explicit String(std::string value);
 
         explicit String(const std::string *value);
 
@@ -29,8 +29,8 @@ namespace mw {
         bool m_isPointer;
 
         union {
-            std::string m_value;
-            const std::string *m_pValue{};
+            std::string m_value{};
+            const std::string *m_pValue;
         };
     };
 } // mw

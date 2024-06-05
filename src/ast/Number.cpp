@@ -10,15 +10,15 @@
 #include "Number.h"
 
 namespace mw {
-    Number::Number(const int value) :
+    Number::Number(const int64_t value) :
         Ast(Type::number), m_isPointer(false), m_value(value) {
     }
 
-    Number::Number(const int *value) :
+    Number::Number(const int64_t *value) :
         Ast(Type::number), m_isPointer(true), m_pValue(value) {
     }
 
-    int Number::value() const {
+    int64_t Number::value() const {
         if (!m_isPointer) {
             return m_value;
         }

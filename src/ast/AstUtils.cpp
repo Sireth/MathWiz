@@ -37,11 +37,11 @@ namespace mw {
         return std::make_shared<String>(value);
     }
 
-    std::shared_ptr<Ast> new_number(int value) {
+    std::shared_ptr<Ast> new_number(int64_t value) {
         return std::make_shared<Number>(value);
     }
 
-    std::shared_ptr<Ast> new_number(const int *value) {
+    std::shared_ptr<Ast> new_number(const int64_t *value) {
         return std::make_shared<Number>(value);
     }
 

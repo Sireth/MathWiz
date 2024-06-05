@@ -126,7 +126,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<AddOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Number>(nums.value().first + nums.value().second);
             return;
@@ -139,7 +139,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<SubtractOperator> ast) {
-        auto res = getValues<int>(ast);
+        auto res = getValues<int64_t>(ast);
         if (res == boost::none) {
             throw std::runtime_error("Operands are not a numbers!");
         }
@@ -148,7 +148,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<MultiplyOperator> ast) {
-        auto res = getValues<int>(ast);
+        auto res = getValues<int64_t>(ast);
         if (res == boost::none) {
             throw std::runtime_error("Operands are not a numbers!");
         }
@@ -156,7 +156,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<DivideOperator> ast) {
-        auto res = getValues<int>(ast);
+        auto res = getValues<int64_t>(ast);
         if (res == boost::none) {
             throw std::runtime_error("Operands are not a numbers!");
         }
@@ -164,7 +164,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<GreaterOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Boolean>(nums.value().first > nums.value().second);
             return;
@@ -182,7 +182,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<LessOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Boolean>(nums.value().first < nums.value().second);
             return;
@@ -200,7 +200,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<EqualOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Boolean>(nums.value().first == nums.value().second);
             return;
@@ -218,7 +218,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(const std::shared_ptr<NotEqualOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Boolean>(nums.value().first != nums.value().second);
             return;
@@ -236,7 +236,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(std::shared_ptr<GreaterEqualOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Boolean>(nums.value().first >= nums.value().second);
             return;
@@ -254,7 +254,7 @@ namespace mw {
     }
 
     void EvalVisitor::visit(std::shared_ptr<LessEqualOperator> ast) {
-        auto nums = getValues<int>(ast);
+        auto nums = getValues<int64_t>(ast);
         if (nums != boost::none) {
             m_result = std::make_shared<Boolean>(nums.value().first <= nums.value().second);
             return;

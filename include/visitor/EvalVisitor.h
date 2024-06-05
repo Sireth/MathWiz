@@ -73,7 +73,7 @@ private:
 };
 
     template<>
-        inline boost::optional<std::pair<int, int>> EvalVisitor::getValues(const std::shared_ptr<BinaryOperator> &ast) {
+        inline boost::optional<std::pair<int64_t, int64_t>> EvalVisitor::getValues(const std::shared_ptr<BinaryOperator> &ast) {
         visit(As<Ast>(ast->left()));
         if(m_result->type() == Ast::Type::number) {
             const auto left = As<Number>(m_result)->value();

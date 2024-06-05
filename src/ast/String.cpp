@@ -10,14 +10,12 @@
 #include "String.h"
 
 namespace mw {
-    String::String(const std::string &value) :
-        Ast(Type::string), m_isPointer(false) {
-        m_value = value;
+    String::String(std::string value) :
+        Ast(Type::string), m_isPointer(false), m_value(std::move(value)) {
     }
 
     String::String(const std::string *value) :
-        Ast(Type::string), m_isPointer(true) {
-        m_pValue = value;
+        Ast(Type::string), m_isPointer(true), m_pValue(value) {
     }
 
     String::~String() {

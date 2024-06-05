@@ -39,7 +39,7 @@ namespace mw {
     };
 
     template<>
-    inline void VariableTable::setVariable(const std::string &name, const int *value) {
+    inline void VariableTable::setVariable(const std::string &name, const int64_t *value) {
         const auto it = m_variables.insert({name, std::make_shared<Variable>(name, new_number(value))});
         if (!it.second) {
             throw std::runtime_error("Variable '" + name + "' already exists");
@@ -47,7 +47,7 @@ namespace mw {
     }
 
     template<>
-    inline void VariableTable::setVariable(const std::string &name, int *value) {
+    inline void VariableTable::setVariable(const std::string &name, int64_t *value) {
         const auto it = m_variables.insert({name, std::make_shared<Variable>(name, new_number(value))});
         if (!it.second) {
             throw std::runtime_error("Variable '" + name + "' already exists");
@@ -55,7 +55,7 @@ namespace mw {
     }
 
     template<>
-    inline void VariableTable::setVariable(const std::string &name, const int &value) {
+    inline void VariableTable::setVariable(const std::string &name, const int64_t &value) {
         const auto it = m_variables.insert({name, std::make_shared<Variable>(name, new_number(value))});
         if (!it.second) {
             throw std::runtime_error("Variable '" + name + "' already exists");

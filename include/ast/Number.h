@@ -14,16 +14,16 @@
 namespace mw {
     class Number : public Ast {
     public:
-        explicit Number(int value);
-        explicit Number(const int *value);
+        explicit Number(int64_t value);
+        explicit Number(const int64_t *value);
 
-        int value() const;
+        int64_t value() const;
 
     protected:
         bool m_isPointer;
         union {
-            int m_value;
-            const int *m_pValue;
+            int64_t m_value;
+            const int64_t *m_pValue;
         };
     };
 } // namespace mw
