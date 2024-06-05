@@ -19,4 +19,12 @@ namespace mw {
         }
         return it->second;
     }
+
+    void VariableTable::setVariable(const std::shared_ptr<Variable>& variable) {
+        auto name = variable->name();
+        const auto it = m_variables.insert({name, variable});
+        if (!it.second) {
+            throw std::runtime_error("Variable '" + name + "' already exists");
+        }
+    }
 } // mw

@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "AstUtils.h"
+#include "EvalVisitor.h"
 #include "Variable.h"
 
 namespace mw {
@@ -33,6 +34,8 @@ namespace mw {
 
         template<typename T>
         void setVariable(const std::string &name, T *value);
+
+        void setVariable(const std::shared_ptr<Variable>& variable);
 
     protected:
         std::unordered_map<std::string, std::shared_ptr<Variable> > m_variables;
