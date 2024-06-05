@@ -13,6 +13,7 @@
 #include <memory>
 
 #include "BinaryOperator.h"
+#include "UnaryOperator.h"
 
 namespace mw {
     std::shared_ptr<Ast> new_name(std::string value);
@@ -56,6 +57,12 @@ namespace mw {
     std::shared_ptr<Ast> new_or_operator(std::shared_ptr<Ast> left, std::shared_ptr<Ast> right);
 
     std::shared_ptr<Ast> new_variable(const std::string &name, std::shared_ptr<Ast> value);
+
+    std::shared_ptr<Ast> new_unary_operator(std::shared_ptr<Ast> left, UnaryOperator::Type type);
+
+    std::shared_ptr<Ast> new_not_operator(std::shared_ptr<Ast> left);
+
+    std::shared_ptr<Ast> new_negate_operator(std::shared_ptr<Ast> left);
 
     template<class AstClass>
     std::shared_ptr<AstClass> As(const std::shared_ptr<Ast> ast) {

@@ -39,6 +39,7 @@ set(MATH_WIZ_INCLUDE_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ast
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ast/operators
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ast/operators/binary
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ast/operators/unary
         ${CMAKE_CURRENT_SOURCE_DIR}/include/visitor
 )
 
@@ -69,11 +70,13 @@ set(MATH_WIZ_HEADERS
         include/ast/operators/binary/AndOperator.h
         include/ast/operators/binary/OrOperator.h
 
+        include/ast/operators/unary/UnaryOperator.h
+        include/ast/operators/unary/NotOperator.h
+        include/ast/operators/unary/NegateOperator.h
+
         include/visitor/AstVisitor.h
         include/visitor/EvalVisitor.h
-        src/VariableTable.cpp
         include/VariableTable.h
-        src/ast/Variable.cpp
         include/ast/Variable.h
 )
 
@@ -104,12 +107,14 @@ set(MATH_WIZ_SOURCES
         src/ast/operators/binary/AndOperator.cpp
         src/ast/operators/binary/OrOperator.cpp
 
+        src/ast/operators/unary/UnaryOperator.cpp
+        src/ast/operators/unary/NotOperator.cpp
+        src/ast/operators/unary/NegateOperator.cpp
+
         src/visitor/AstVisitor.cpp
         src/visitor/EvalVisitor.cpp
         src/VariableTable.cpp
-        include/VariableTable.h
         src/ast/Variable.cpp
-        include/ast/Variable.h
 )
 
 set(PROJECT_SOURCES

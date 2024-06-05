@@ -20,7 +20,9 @@
 #include "LessEqualOperator.h"
 #include "LessOperator.h"
 #include "MultiplyOperator.h"
+#include "NegateOperator.h"
 #include "NotEqualOperator.h"
+#include "NotOperator.h"
 #include "Number.h"
 #include "OrOperator.h"
 #include "String.h"
@@ -107,5 +109,13 @@ namespace mw {
 
     std::shared_ptr<Ast> new_variable(const std::string &name, std::shared_ptr<Ast> value) {
         return std::make_shared<Variable>(name, std::move(value));
+    }
+
+    std::shared_ptr<Ast> new_not_operator(std::shared_ptr<Ast> left) {
+        return std::make_shared<NotOperator>(std::move(left));
+    }
+
+    std::shared_ptr<Ast> new_negate_operator(std::shared_ptr<Ast> left) {
+        return std::make_shared<NegateOperator>(std::move(left));
     }
 } // mw

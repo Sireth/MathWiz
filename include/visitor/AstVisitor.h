@@ -13,6 +13,8 @@
 #include <memory>
 
 namespace mw {
+    class NegateOperator;
+    class NotOperator;
     class Variable;
     class OrOperator;
     class AndOperator;
@@ -31,6 +33,7 @@ namespace mw {
     class Boolean;
     class Number;
     class BinaryOperator;
+    class UnaryOperator;
     class Ast;
 
     class AstVisitor {
@@ -74,6 +77,12 @@ namespace mw {
         virtual void visit(std::shared_ptr<AndOperator> ast) = 0;
 
         virtual void visit(std::shared_ptr<OrOperator> ast) = 0;
+
+        virtual void visit(std::shared_ptr<UnaryOperator> ast) = 0;
+
+        virtual void visit(std::shared_ptr<NotOperator> ast) = 0;
+
+        virtual void visit(std::shared_ptr<NegateOperator> ast) = 0;
     };
 } // mw
 

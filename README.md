@@ -27,16 +27,16 @@ cmake --build .
 int main(){
     mw::Driver driver;
     auto &var_table = driver.variableTable();
-    int bar = 12345;
+    int64_t bar = -12345;
 
     std::string str = "Helly";
 
-    var_table.setVariable("foo", 1234);
+    var_table.setVariable("foo", 1234l);
     var_table.setVariable("bar", &bar);
     var_table.setVariable("help", false);
     var_table.setVariable("str", &str);
 
-    const auto ast = driver.Parse(R"(((foo < bar) || str <= "Hello world") && help != true)");
+    const auto ast = driver.Parse(R"((!(foo < -455 + bar) || str <= "Hello world") && !help)");
     mw::EvalVisitor visitor;
 
     visitor.visit(ast);

@@ -6,7 +6,7 @@
  *
  * (c) 2024, SWD Embedded Systems Limited, http://www.kpda.ru
  */
- 
+
 #include "EvalVisitor.h"
 
 #include "OrOperator.h"
@@ -23,10 +23,11 @@
 #include "SubtractOperator.h"
 #include "AddOperator.h"
 #include "AstUtils.h"
+#include "NegateOperator.h"
+#include "NotOperator.h"
 #include "Variable.h"
 
 namespace mw {
-
     void EvalVisitor::visit(const std::shared_ptr<Ast> ast) {
         switch (ast->type()) {
             case Ast::Type::number: {
@@ -47,6 +48,10 @@ namespace mw {
             }
             case Ast::Type::binary_operator: {
                 visit(As<BinaryOperator>(ast));
+                break;
+            }
+            case Ast::Type::unary_operator: {
+                visit(As<UnaryOperator>(ast));
                 break;
             }
             default:
@@ -294,6 +299,43 @@ namespace mw {
             throw std::runtime_error("Operands are not booleans!");
         }
         m_result = std::make_shared<Boolean>(bools.value().first || bools.value().second);
+    }
+
+    void EvalVisitor::visit(std::shared_ptr<UnaryOperator> ast) {
+        switch (ast->op()) {
+            case UnaryOperator::_not: {
+                visit(As<NotOperator>(ast));
+                break;
+            }
+            case UnaryOperator::negate: {
+                visit(As<NegateOperator>(ast));
+                break;
+            }
+            default:
+                throw std::runtime_error("Ast is broken!");
+        }
+    }
+
+    void EvalVisitor::visit(const std::shared_ptr<NotOperator> ast) {
+        visit(As<Ast>(ast->left()));
+        switch (m_result->type()) {
+            case Ast::Type::boolean:
+                m_result = std::make_shared<Boolean>(!As<Boolean>(m_result)->value());
+                break;
+            default:
+                throw std::runtime_error("Operand is not supported!");
+        }
+    }
+
+    void EvalVisitor::visit(const std::shared_ptr<NegateOperator> ast) {
+        visit(As<Ast>(ast->left()));
+        switch (m_result->type()) {
+            case Ast::Type::number:
+                m_result = std::make_shared<Number>(-As<Number>(m_result)->value());
+                break;
+            default:
+                throw std::runtime_error("Operand is not supported!");
+        }
     }
 
     void EvalVisitor::visit(const std::shared_ptr<Number> ast) {

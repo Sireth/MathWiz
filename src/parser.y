@@ -78,6 +78,7 @@
 %nterm <std::shared_ptr<mw::Ast>> comp_expr
 %nterm <std::shared_ptr<mw::Ast>> add_expr
 %nterm <std::shared_ptr<mw::Ast>> mul_expr
+%nterm <std::shared_ptr<mw::Ast>> unary_expr
 
 
 // %nterm <std::shared_ptr<mw::Ast>> query
@@ -129,9 +130,15 @@ add_expr:
     ;
 
 mul_expr:
+    unary_expr
+    | mul_expr "*" unary_expr { $$ = mw::new_multiply_operator($1, $3); }
+    | mul_expr "/" unary_expr { $$ = mw::new_divide_operator($1, $3); }
+    ;
+
+unary_expr:
     factor
-    | mul_expr "*" factor { $$ = mw::new_multiply_operator($1, $3); }
-    | mul_expr "/" factor { $$ = mw::new_divide_operator($1, $3); }
+    | "-" unary_expr { $$ = mw::new_negate_operator($2); }
+    | "!" unary_expr { $$ = mw::new_not_operator($2); }
     ;
 
 factor:

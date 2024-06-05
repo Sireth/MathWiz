@@ -19,6 +19,7 @@
 #include "Number.h"
 #include "String.h"
 #include "BinaryOperator.h"
+#include "UnaryOperator.h"
 
 namespace mw {
 
@@ -62,6 +63,12 @@ public:
     void visit(std::shared_ptr<AndOperator> ast) override;
 
     void visit(std::shared_ptr<OrOperator> ast) override;
+
+    void visit(std::shared_ptr<UnaryOperator> ast) override;
+
+    void visit(std::shared_ptr<NotOperator> ast) override;
+
+    void visit(std::shared_ptr<NegateOperator> ast) override;
 
     std::shared_ptr<Ast> result() const;
 

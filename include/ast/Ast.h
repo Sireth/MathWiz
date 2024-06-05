@@ -21,6 +21,7 @@ namespace mw {
             boolean,
             variable,
             binary_operator,
+            unary_operator,
         };
 
         explicit Ast(Type type);
