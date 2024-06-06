@@ -24,7 +24,7 @@ docker-compose up -d
 docker-compose exec math_wiz bash
 ```
 
-Это выполнит сборку проекта Math Wiz внутри контейнера.
+Это выполнит настройку проекта Math Wiz внутри контейнера.
 
 ## 4. Использование Math Wiz Builder
 
@@ -33,7 +33,7 @@ docker-compose exec math_wiz bash
 Пример запуска с пользовательским путем к папке сборки:
 
 ```bash
-BUILD_DIR=/path/to/custom/build/dir docker-compose up -d
+BUILD_DIR=/path/to/custom/build/dir docker-compose up math_wiz_builder
 ```
 
 Это выполнит сборку проекта Math Wiz в указанную пользователем папку.
